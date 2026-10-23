@@ -1098,7 +1098,7 @@ table.mt{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
  .card .face .hint{font-size:12.5px;align-items:flex-start}
  .card .face .hint span{white-space:nowrap}
  .card .face.front{min-height:0}
- .card .face .imgbox{min-height:min(118vw,58vh);margin-bottom:54px}
+ .card .face .imgbox{min-height:min(100vw,44vh);margin-bottom:54px}
  .card .face.back{min-height:0}
  .back .la{font-size:25px}
  .back .kz{font-size:19px}
@@ -1154,6 +1154,28 @@ table.mt{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
 .b-br-row:first-child:last-child .b-br-k::after{top:-22px;height:calc(50% + 23px)}
 .b-br-v{padding-top:7px}
 @media(max-width:760px){.b-br-v{padding-top:0}}
+
+/* ===== v6: Safari/iOS үшін қарапайым сурет орналасуы ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.stage img{width:100%!important;height:auto!important}
+.card .face .imgbox{display:flex!important;align-items:center;justify-content:center;flex:1 1 auto;overflow:visible}
+.card .face .imgbox img.single{position:static!important;display:block;width:auto!important;height:auto!important;max-width:100%;max-height:clamp(280px,52vh,620px);object-fit:contain;margin:0 auto}
+.card .face .imgbox .stage{flex:none}
+@media(max-width:760px){
+ .card .face .imgbox img.single{max-height:min(100vw,44vh)}
+ .card .face .hint{flex-wrap:wrap}
+ .card .face .hint span{white-space:normal}
+ .card .face.front .hint span:last-child{display:none}
+}
+
+/* v6: карталар тулбары телефонда экраннан шықпасын */
+@media(max-width:760px){
+ .toolbar{flex-wrap:wrap;max-width:100%}
+ .toolbar .seg{display:flex;width:100%;max-width:100%}
+ .toolbar .seg button{flex:1 1 0;min-width:0;padding-left:6px;padding-right:6px;font-size:13.5px;white-space:normal;line-height:1.2}
+ .bnav{max-width:100vw}
+ #app,main{max-width:100vw;overflow-x:clip}
+}
 </style>
 
 <div id="app"><div class="loading">Жүктелуде…</div></div>
@@ -1327,8 +1349,8 @@ function stage(fig,{hot=[],marks={},pick=null,maxH=0.62,numbers=false}={}){
   const ar=fig.w/fig.h;
   const s=h('div',{class:'stage'});
   s.style.aspectRatio=fig.w+' / '+fig.h;
-  s.style.maxWidth=`min(100%, calc(${maxH*100}vh * ${ar.toFixed(4)}))`;
-  s.append(h('img',{src:fig.clean,alt:fig.caption||'',loading:'lazy',draggable:'false'}));
+  s.style.maxWidth=`min(100%, calc(${maxH*100}vh * ${ar.toFixed(4)}))`;s.style.width=s.style.maxWidth;
+  s.append(h('img',{src:fig.clean,alt:fig.caption||'',width:fig.w,height:fig.h,draggable:'false'}));
   fig.labels.forEach((l,i)=>l.boxes.forEach(b=>{
     const cls=['pin'];if(hot.includes(i))cls.push('hot');if(marks[i])cls.push(marks[i]);if(pick&&!marks[i])cls.push('pick');
     const p=h(pick?'button':'span',{class:cls.join(' '),'aria-label':pick?('Белгі '+(i+1)):null},hot.includes(i)?'?':(numbers?String(i+1):''));
@@ -1376,7 +1398,7 @@ function renderCards(panel,all,key){
     if(!deck.length){holder.append(h('div',{class:'empty'},onlyUnknown?'Барлық карталарды білесіз! Жарайсыз.':'Карта жоқ.'));return}
     const c=deck[pos];
     let front;
-    if(c.type==='muscle')front=h('div',{class:'imgbox'},h('img',{class:'single',src:c.img,alt:'Бұлшықет суреті'}));
+    if(c.type==='muscle')front=h('div',{class:'imgbox'},h('img',{class:'single',src:c.img,alt:'Бұлшықет суреті',draggable:'false'}));
     else front=h('div',{class:'imgbox'},stage(c.fig,{hot:[c.li],maxH:.56}));
     const crow=[['Тобы',c.kind],['Басталуы',c.orig],['Бекінуі',c.ins],[c.type==='muscle'?'Қызметі':'Маңызы',c.text&&c.text.replace(/^Қызметі:\s*/,'')],['Нервтенуі',c.nerve]].filter(r=>r[1]);
     const back=h('div',{class:'face back'},
