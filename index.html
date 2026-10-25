@@ -1176,6 +1176,31 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
  .bnav{max-width:100vw}
  #app,main{max-width:100vw;overflow-x:clip}
 }
+
+/* ===== РК дайындық ===== */
+.rk-home{margin-bottom:8px}
+.rk-list{display:grid;gap:0}
+.rk-q{display:block;font-size:14px;line-height:1.45;color:var(--ink-2);margin-top:4px;font-weight:400}
+.rk-chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 18px}
+.rk-chips a{min-width:40px;height:40px;padding:0 6px;border-radius:11px;border:1.5px solid var(--line);background:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;text-decoration:none;color:var(--ink)}
+.rk-chips a:hover{border-color:#64BFEC}
+.rk-chips a.on{background:#1B7DB0;border-color:#1B7DB0;color:#fff}
+.rk-sect{padding:6px clamp(14px,3vw,34px) 24px}
+.rk-bd>.b-h{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);color:#1B7DB0}
+.rk-bd>.b-h:first-of-type{border-top:0;margin-top:14px;padding-top:0}
+.rk-pn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0 40px}
+.rk-pn .btn{display:flex;align-items:center;min-height:54px;padding:10px 16px;border-radius:12px;background:#fff;border:1.5px solid var(--line);color:var(--ink);font-weight:700;text-decoration:none;line-height:1.3}
+.rk-pn .btn.nx{justify-content:flex-end;text-align:right}
+.shero.rk .stext{font-size:16.5px}
+@media(max-width:760px){
+ .bnav{grid-template-columns:repeat(6,1fr)!important;padding-inline:2px}
+ .bnav a{font-size:12px!important;gap:2px}
+ .bnav svg{width:21px;height:21px}
+ .rk-chips{gap:5px}.rk-chips a{min-width:36px;height:36px;font-size:14px}
+ .rk-pn{grid-template-columns:1fr}
+ .rk-pn .btn.nx{justify-content:flex-start;text-align:left}
+ .rk-sect{padding:4px 12px 18px}
+}
 </style>
 
 <div id="app"><div class="loading">Жүктелуде…</div></div>
@@ -1496,6 +1521,7 @@ function renderFind(panel,m){
 const UI_LOGO='img/logo.png';
 const UI_MZ={"hi": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjYwIDUwIDI2MCAyNzAiIHdpZHRoPSI1MjAiIGhlaWdodD0iNTQwIj48cGF0aCBkPSJNMTAwLjAgMTM0LjAgQzEwMC4wIDk4LjAgMTQwLjAgOTguMCAxNDAuMCAxMTguMCBDMTQwLjAgOTguMCAxODAuMCA5OC4wIDE4MC4wIDExOC4wIEMxODAuMCA5OC4wIDIyMC4wIDk4LjAgMjIwLjAgMTE4LjAgQzIyMC4wIDk4LjAgMjYwLjAgOTguMCAyNjAuMCAxMzQuMCBMMjYwLjAgMTc1LjUgQzI3MS4wIDE3Ny4wIDI5NS4yIDE1Ni4xIDI5OC41IDE4OS4xIEMyOTUuMiAyMjIuMSAyNzEuMCAyMDEuMiAyNjAuMCAyMDIuNyBMMjYwLjAgMjYzLjAgQzI1OC4wIDI4Ny43IDIyMi4wIDI4Ny43IDIyMC4wIDI3MS40IEMyMTguMCAyODcuNyAxODIuMCAyODcuNyAxODAuMCAyNzEuNCBDMTc4LjAgMjg3LjcgMTQyLjAgMjg3LjcgMTQwLjAgMjcxLjQgQzEzOC4wIDI4Ny43IDEwMi4wIDI4Ny43IDEwMC4wIDI2My4wIEwxMDAuMCAxNjIuMCBDMTEwLjAgMTYwLjYgMTMxLjAgMTc2LjYgMTMyLjAgMTQ5LjYgQzEzMS4wIDEyMi42IDExMC4wIDEzOC42IDEwMC4wIDEzNy4yIEwxMDAuMCAxMzQuMCBaIiBmaWxsPSIjOENDQkZGIi8+PHBhdGggZD0iTTEwMC4wIDEzNC4wIEMxMDAuMCA5OC4wIDE0MC4wIDk4LjAgMTQwLjAgMTE4LjAgQzE0MC4wIDk4LjAgMTgwLjAgOTguMCAxODAuMCAxMTguMCBDMTgwLjAgOTguMCAyMjAuMCA5OC4wIDIyMC4wIDExOC4wIEMyMjAuMCA5OC4wIDI2MC4wIDk4LjAgMjYwLjAgMTM0LjAgQzI2MC4wIDExMC44IDIyMC4wIDExMC44IDIyMC4wIDExOC4wIEMyMjAuMCAxMTAuOCAxODAuMCAxMTAuOCAxODAuMCAxMTguMCBDMTgwLjAgMTEwLjggMTQwLjAgMTEwLjggMTQwLjAgMTE4LjAgQzE0MC4wIDExMC44IDEwMC4wIDExMC44IDEwMC4wIDEzNC4wIFoiIGZpbGw9IiM1RkFFRjIiLz48Y2xpcFBhdGggaWQ9InBjMTgiPjxwYXRoIGQ9Ik0xMDAuMCAxMzQuMCBDMTAwLjAgOTguMCAxNDAuMCA5OC4wIDE0MC4wIDExOC4wIEMxNDAuMCA5OC4wIDE4MC4wIDk4LjAgMTgwLjAgMTE4LjAgQzE4MC4wIDk4LjAgMjIwLjAgOTguMCAyMjAuMCAxMTguMCBDMjIwLjAgOTguMCAyNjAuMCA5OC4wIDI2MC4wIDEzNC4wIEwyNjAuMCAxNzUuNSBDMjcxLjAgMTc3LjAgMjk1LjIgMTU2LjEgMjk4LjUgMTg5LjEgQzI5NS4yIDIyMi4xIDI3MS4wIDIwMS4yIDI2MC4wIDIwMi43IEwyNjAuMCAyNjMuMCBDMjU4LjAgMjg3LjcgMjIyLjAgMjg3LjcgMjIwLjAgMjcxLjQgQzIxOC4wIDI4Ny43IDE4Mi4wIDI4Ny43IDE4MC4wIDI3MS40IEMxNzguMCAyODcuNyAxNDIuMCAyODcuNyAxNDAuMCAyNzEuNCBDMTM4LjAgMjg3LjcgMTAyLjAgMjg3LjcgMTAwLjAgMjYzLjAgTDEwMC4wIDE2Mi4wIEMxMTAuMCAxNjAuNiAxMzEuMCAxNzYuNiAxMzIuMCAxNDkuNiBDMTMxLjAgMTIyLjYgMTEwLjAgMTM4LjYgMTAwLjAgMTM3LjIgTDEwMC4wIDEzNC4wIFoiLz48L2NsaXBQYXRoPjxnIGNsaXAtcGF0aD0idXJsKCNwYzE4KSI+PHBhdGggZD0iTTg4LjAgMjI2LjBMMTU2LjAgMjI2LjBMMTgwLjAgMjUyLjBMMjA0LjAgMjI2LjBMMjcyLjAgMjI2LjBMMjcyLjAgMzA2LjBMODguMCAzMDYuMFoiIGZpbGw9IiNGRkZGRkYiLz48cmVjdCB4PSIyMzguMCIgeT0iMjI2LjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSI4MC4wIiBmaWxsPSIjRTNFQ0Y4IiBvcGFjaXR5PSIuNyIvPjxwYXRoIGQ9Ik0xNTYuMCAyMjkuMEwxODAuMCAyNTUuMEwyMDQuMCAyMjkuMCIgc3Ryb2tlPSIjQkZEOEY1IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvZz48cmVjdCB4PSIxMjIuMCIgeT0iMjM0LjAiIHdpZHRoPSI1IiBoZWlnaHQ9IjE1IiByeD0iMi41IiBmaWxsPSIjRkZGRkZGIi8+PHBhdGggZD0iTTExNC4wIDI0Mi4waDIydjEyYTQgNCAwIDAgMSAtNCA0aC0xNGE0IDQgMCAwIDEgLTQgLTR6IiBmaWxsPSIjRTNFQ0Y4Ii8+PHBhdGggZD0iTTE2MC4wIDIyNS4wQzE1NC4wIDI0MC4wIDE0Ni4wIDI1MC4wIDE0NC4wIDI2Mi4wIiBzdHJva2U9IiNFNTQ4NEQiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwMC4wIDIyNS4wQzIwNi4wIDI0Mi4wIDIxOC4wIDI1MC4wIDIxOC4wIDI2NC4wIiBzdHJva2U9IiNFNTQ4NEQiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjE4LjAiIGN5PSIyNzAuMCIgcj0iNy41IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMjE4LjAiIGN5PSIyNzAuMCIgcj0iMy4yIiBmaWxsPSIjRTU0ODREIi8+PHBhdGggZD0iTTE0NC4wIDI2Mi4wbC02IDhNMTQ0LjAgMjYyLjBsNiA4IiBzdHJva2U9IiNENkRERTYiIHN0cm9rZS13aWR0aD0iMy41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0yOCkiPjxjaXJjbGUgY3g9IjE0NSIgY3k9IjIyMCIgcj0iMTciIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxNDUiIGN5PSIyMjAiIHI9IjkiIGZpbGw9IiMwQjBCMTIiLz48Y2lyY2xlIGN4PSIyMTUiIGN5PSIyMjAiIHI9IjE3IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMjE1IiBjeT0iMjIwIiByPSI5IiBmaWxsPSIjMEIwQjEyIi8+PHBhdGggZD0iTTE2OCAyMzZxMTIgMTIgMjQgMCIgc3Ryb2tlPSIjMEIwQjEyIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvZz48L3N2Zz4=", "ok": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjYwIDUwIDI2MCAyNzAiIHdpZHRoPSI1MjAiIGhlaWdodD0iNTQwIj48ZyB0cmFuc2Zvcm09InJvdGF0ZSgtOCAxODAgMjEwKSI+PHBhdGggZD0iTTk1LjAgMTM2LjAgQzk1LjAgMTAwLjAgMTM3LjUgMTAwLjAgMTM3LjUgMTIwLjAgQzEzNy41IDEwMC4wIDE4MC4wIDEwMC4wIDE4MC4wIDEyMC4wIEMxODAuMCAxMDAuMCAyMjIuNSAxMDAuMCAyMjIuNSAxMjAuMCBDMjIyLjUgMTAwLjAgMjY1LjAgMTAwLjAgMjY1LjAgMTM2LjAgTDI2NS4wIDE3Mi42IEMyNzcuMCAxNzQuMyAzMDMuNCAxNTEuNSAzMDcuMCAxODcuNSBDMzAzLjQgMjIzLjUgMjc3LjAgMjAwLjcgMjY1LjAgMjAyLjQgTDI2NS4wIDI1Ny4wIEMyNjIuOSAyODEuNyAyMjQuNiAyODEuNyAyMjIuNSAyNjUuNCBDMjIwLjQgMjgxLjcgMTgyLjEgMjgxLjcgMTgwLjAgMjY1LjQgQzE3Ny45IDI4MS43IDEzOS42IDI4MS43IDEzNy41IDI2NS40IEMxMzUuNCAyODEuNyA5Ny4xIDI4MS43IDk1LjAgMjU3LjAgTDk1LjAgMTYyLjQgQzEwNS4wIDE2MS4wIDEyNi4wIDE3Ny4wIDEyNy4wIDE1MC4wIEMxMjYuMCAxMjMuMCAxMDUuMCAxMzkuMCA5NS4wIDEzNy42IEw5NS4wIDEzNi4wIFoiIGZpbGw9IiM4Q0NCRkYiLz48cGF0aCBkPSJNOTUuMCAxMzYuMCBDOTUuMCAxMDAuMCAxMzcuNSAxMDAuMCAxMzcuNSAxMjAuMCBDMTM3LjUgMTAwLjAgMTgwLjAgMTAwLjAgMTgwLjAgMTIwLjAgQzE4MC4wIDEwMC4wIDIyMi41IDEwMC4wIDIyMi41IDEyMC4wIEMyMjIuNSAxMDAuMCAyNjUuMCAxMDAuMCAyNjUuMCAxMzYuMCBDMjY1LjAgMTEyLjggMjIyLjUgMTEyLjggMjIyLjUgMTIwLjAgQzIyMi41IDExMi44IDE4MC4wIDExMi44IDE4MC4wIDEyMC4wIEMxODAuMCAxMTIuOCAxMzcuNSAxMTIuOCAxMzcuNSAxMjAuMCBDMTM3LjUgMTEyLjggOTUuMCAxMTIuOCA5NS4wIDEzNi4wIFoiIGZpbGw9IiM1RkFFRjIiLz48Y2xpcFBhdGggaWQ9InBjMTAiPjxwYXRoIGQ9Ik05NS4wIDEzNi4wIEM5NS4wIDEwMC4wIDEzNy41IDEwMC4wIDEzNy41IDEyMC4wIEMxMzcuNSAxMDAuMCAxODAuMCAxMDAuMCAxODAuMCAxMjAuMCBDMTgwLjAgMTAwLjAgMjIyLjUgMTAwLjAgMjIyLjUgMTIwLjAgQzIyMi41IDEwMC4wIDI2NS4wIDEwMC4wIDI2NS4wIDEzNi4wIEwyNjUuMCAxNzIuNiBDMjc3LjAgMTc0LjMgMzAzLjQgMTUxLjUgMzA3LjAgMTg3LjUgQzMwMy40IDIyMy41IDI3Ny4wIDIwMC43IDI2NS4wIDIwMi40IEwyNjUuMCAyNTcuMCBDMjYyLjkgMjgxLjcgMjI0LjYgMjgxLjcgMjIyLjUgMjY1LjQgQzIyMC40IDI4MS43IDE4Mi4xIDI4MS43IDE4MC4wIDI2NS40IEMxNzcuOSAyODEuNyAxMzkuNiAyODEuNyAxMzcuNSAyNjUuNCBDMTM1LjQgMjgxLjcgOTcuMSAyODEuNyA5NS4wIDI1Ny4wIEw5NS4wIDE2Mi40IEMxMDUuMCAxNjEuMCAxMjYuMCAxNzcuMCAxMjcuMCAxNTAuMCBDMTI2LjAgMTIzLjAgMTA1LjAgMTM5LjAgOTUuMCAxMzcuNiBMOTUuMCAxMzYuMCBaIi8+PC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjcGMxMCkiPjxwYXRoIGQ9Ik04My4wIDIyMC4wTDE1Ni4wIDIyMC4wTDE4MC4wIDI0Ni4wTDIwNC4wIDIyMC4wTDI3Ny4wIDIyMC4wTDI3Ny4wIDMwMC4wTDgzLjAgMzAwLjBaIiBmaWxsPSIjRkZGRkZGIi8+PHJlY3QgeD0iMjQzLjAiIHk9IjIyMC4wIiB3aWR0aD0iNDAiIGhlaWdodD0iODAuMCIgZmlsbD0iI0UzRUNGOCIgb3BhY2l0eT0iLjciLz48cGF0aCBkPSJNMTU2LjAgMjIzLjBMMTgwLjAgMjQ5LjBMMjA0LjAgMjIzLjAiIHN0cm9rZT0iI0JGRDhGNSIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L2c+PHJlY3QgeD0iMTE3LjAiIHk9IjIyOC4wIiB3aWR0aD0iNSIgaGVpZ2h0PSIxNSIgcng9IjIuNSIgZmlsbD0iI0ZGRkZGRiIvPjxwYXRoIGQ9Ik0xMDkuMCAyMzYuMGgyMnYxMmE0IDQgMCAwIDEgLTQgNGgtMTRhNCA0IDAgMCAxIC00IC00eiIgZmlsbD0iI0UzRUNGOCIvPjxwYXRoIGQ9Ik0xNjAuMCAyMTkuMEMxNTQuMCAyMzQuMCAxNDYuMCAyNDQuMCAxNDQuMCAyNTYuMCIgc3Ryb2tlPSIjRTU0ODREIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0yMDAuMCAyMTkuMEMyMDYuMCAyMzYuMCAyMTguMCAyNDQuMCAyMTguMCAyNTguMCIgc3Ryb2tlPSIjRTU0ODREIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIxOC4wIiBjeT0iMjY0LjAiIHI9IjcuNSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjIxOC4wIiBjeT0iMjY0LjAiIHI9IjMuMiIgZmlsbD0iI0U1NDg0RCIvPjxwYXRoIGQ9Ik0xNDQuMCAyNTYuMGwtNiA4TTE0NC4wIDI1Ni4wbDYgOCIgc3Ryb2tlPSIjRDZEREU2IiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTI4KSI+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjE1IiByPSIxNyIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjE0MiIgY3k9IjIxNSIgcj0iOSIgZmlsbD0iIzBCMEIxMiIvPjxjaXJjbGUgY3g9IjIyMiIgY3k9IjIwNyIgcj0iMTciIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIyMjQiIGN5PSIyMDciIHI9IjkiIGZpbGw9IiMwQjBCMTIiLz48cGF0aCBkPSJNMTY4IDIyNmM0LTEyIDI4LTEyIDMwIDIgMiAxNC04IDI0LTE2IDI0cy0xOC0xNC0xNC0yNnoiIGZpbGw9IiMwQjBCMTIiLz48cGF0aCBkPSJNMTc3IDIzOGMyLTYgMTEtNiAxMSAwcy02IDctOSA0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9nPjwvc3ZnPg==", "no": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjYwIDUwIDI2MCAyNzAiIHdpZHRoPSI1MjAiIGhlaWdodD0iNTQwIj48cGF0aCBkPSJNMTA0LjAgMTY2LjAgQzEwNC4wIDEzMC4wIDE0Mi4wIDEzMC4wIDE0Mi4wIDE1MC4wIEMxNDIuMCAxMzAuMCAxODAuMCAxMzAuMCAxODAuMCAxNTAuMCBDMTgwLjAgMTMwLjAgMjE4LjAgMTMwLjAgMjE4LjAgMTUwLjAgQzIxOC4wIDEzMC4wIDI1Ni4wIDEzMC4wIDI1Ni4wIDE2Ni4wIEwyNTYuMCAxOTUuOSBDMjY0LjAgMTk3LjAgMjgxLjYgMTgxLjggMjg0LjAgMjA1LjggQzI4MS42IDIyOS44IDI2NC4wIDIxNC42IDI1Ni4wIDIxNS43IEwyNTYuMCAyNjMuMCBDMjU0LjEgMjgzLjkgMjE5LjkgMjgzLjkgMjE4LjAgMjcwLjEgQzIxNi4xIDI4My45IDE4MS45IDI4My45IDE4MC4wIDI3MC4xIEMxNzguMSAyODMuOSAxNDMuOSAyODMuOSAxNDIuMCAyNzAuMSBDMTQwLjEgMjgzLjkgMTA1LjkgMjgzLjkgMTA0LjAgMjYzLjAgTDEwNC4wIDE4My41IEMxMTEuMCAxODIuNSAxMjUuNyAxOTMuNyAxMjYuNCAxNzQuOCBDMTI1LjcgMTU1LjkgMTExLjAgMTY3LjEgMTA0LjAgMTY2LjEgTDEwNC4wIDE2Ni4wIFoiIGZpbGw9IiM4Q0NCRkYiLz48cGF0aCBkPSJNMTA0LjAgMTY2LjAgQzEwNC4wIDEzMC4wIDE0Mi4wIDEzMC4wIDE0Mi4wIDE1MC4wIEMxNDIuMCAxMzAuMCAxODAuMCAxMzAuMCAxODAuMCAxNTAuMCBDMTgwLjAgMTMwLjAgMjE4LjAgMTMwLjAgMjE4LjAgMTUwLjAgQzIxOC4wIDEzMC4wIDI1Ni4wIDEzMC4wIDI1Ni4wIDE2Ni4wIEMyNTYuMCAxNDIuOCAyMTguMCAxNDIuOCAyMTguMCAxNTAuMCBDMjE4LjAgMTQyLjggMTgwLjAgMTQyLjggMTgwLjAgMTUwLjAgQzE4MC4wIDE0Mi44IDE0Mi4wIDE0Mi44IDE0Mi4wIDE1MC4wIEMxNDIuMCAxNDIuOCAxMDQuMCAxNDIuOCAxMDQuMCAxNjYuMCBaIiBmaWxsPSIjNUZBRUYyIi8+PGNsaXBQYXRoIGlkPSJwYzE1Ij48cGF0aCBkPSJNMTA0LjAgMTY2LjAgQzEwNC4wIDEzMC4wIDE0Mi4wIDEzMC4wIDE0Mi4wIDE1MC4wIEMxNDIuMCAxMzAuMCAxODAuMCAxMzAuMCAxODAuMCAxNTAuMCBDMTgwLjAgMTMwLjAgMjE4LjAgMTMwLjAgMjE4LjAgMTUwLjAgQzIxOC4wIDEzMC4wIDI1Ni4wIDEzMC4wIDI1Ni4wIDE2Ni4wIEwyNTYuMCAxOTUuOSBDMjY0LjAgMTk3LjAgMjgxLjYgMTgxLjggMjg0LjAgMjA1LjggQzI4MS42IDIyOS44IDI2NC4wIDIxNC42IDI1Ni4wIDIxNS43IEwyNTYuMCAyNjMuMCBDMjU0LjEgMjgzLjkgMjE5LjkgMjgzLjkgMjE4LjAgMjcwLjEgQzIxNi4xIDI4My45IDE4MS45IDI4My45IDE4MC4wIDI3MC4xIEMxNzguMSAyODMuOSAxNDMuOSAyODMuOSAxNDIuMCAyNzAuMSBDMTQwLjEgMjgzLjkgMTA1LjkgMjgzLjkgMTA0LjAgMjYzLjAgTDEwNC4wIDE4My41IEMxMTEuMCAxODIuNSAxMjUuNyAxOTMuNyAxMjYuNCAxNzQuOCBDMTI1LjcgMTU1LjkgMTExLjAgMTY3LjEgMTA0LjAgMTY2LjEgTDEwNC4wIDE2Ni4wIFoiLz48L2NsaXBQYXRoPjxnIGNsaXAtcGF0aD0idXJsKCNwYzE1KSI+PHBhdGggZD0iTTkyLjAgMjI0LjBMMTU2LjAgMjI0LjBMMTgwLjAgMjUwLjBMMjA0LjAgMjI0LjBMMjY4LjAgMjI0LjBMMjY4LjAgMzA0LjBMOTIuMCAzMDQuMFoiIGZpbGw9IiNGRkZGRkYiLz48cmVjdCB4PSIyMzQuMCIgeT0iMjI0LjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSI4MC4wIiBmaWxsPSIjRTNFQ0Y4IiBvcGFjaXR5PSIuNyIvPjxwYXRoIGQ9Ik0xNTYuMCAyMjcuMEwxODAuMCAyNTMuMEwyMDQuMCAyMjcuMCIgc3Ryb2tlPSIjQkZEOEY1IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvZz48cmVjdCB4PSIxMjYuMCIgeT0iMjMyLjAiIHdpZHRoPSI1IiBoZWlnaHQ9IjE1IiByeD0iMi41IiBmaWxsPSIjRkZGRkZGIi8+PHBhdGggZD0iTTExOC4wIDI0MC4waDIydjEyYTQgNCAwIDAgMSAtNCA0aC0xNGE0IDQgMCAwIDEgLTQgLTR6IiBmaWxsPSIjRTNFQ0Y4Ii8+PHBhdGggZD0iTTE2MC4wIDIyMy4wQzE1NC4wIDIzOC4wIDE0Ni4wIDI0OC4wIDE0NC4wIDI2MC4wIiBzdHJva2U9IiNFNTQ4NEQiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwMC4wIDIyMy4wQzIwNi4wIDI0MC4wIDIxOC4wIDI0OC4wIDIxOC4wIDI2Mi4wIiBzdHJva2U9IiNFNTQ4NEQiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PGNpcmNsZSBjeD0iMjE4LjAiIGN5PSIyNjguMCIgcj0iNy41IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMjE4LjAiIGN5PSIyNjguMCIgcj0iMy4yIiBmaWxsPSIjRTU0ODREIi8+PHBhdGggZD0iTTE0NC4wIDI2MC4wbC02IDhNMTQ0LjAgMjYwLjBsNiA4IiBzdHJva2U9IiNENkRERTYiIHN0cm9rZS13aWR0aD0iMy41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0yOCkiPjxjaXJjbGUgY3g9IjE0OCIgY3k9IjIyMiIgcj0iMTciIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxNDgiIGN5PSIyMjYiIHI9IjkiIGZpbGw9IiMwQjBCMTIiLz48Y2lyY2xlIGN4PSIyMTIiIGN5PSIyMjIiIHI9IjE3IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMjEyIiBjeT0iMjI2IiByPSI5IiBmaWxsPSIjMEIwQjEyIi8+PGcgdHJhbnNmb3JtPSJyb3RhdGUoLTE0IDE0OCAyMjIpIj48cmVjdCB4PSIxMjgiIHk9IjIwMiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjEyLjQ4IiBmaWxsPSIjOENDQkZGIi8+PC9nPjxnIHRyYW5zZm9ybT0icm90YXRlKDE0IDIxMiAyMjIpIj48cmVjdCB4PSIxOTIiIHk9IjIwMiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjEyLjQ4IiBmaWxsPSIjOENDQkZGIi8+PC9nPjxwYXRoIGQ9Ik0xNzAgMjEycTEwLTEwIDIwIDAiIHN0cm9rZT0iIzBCMEIxMiIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48L2c+PC9zdmc+"};
 const UI_ICO={
+ rk:'<path d="M9 3h6v3H9z"/><path d="M9 4.5H6.5a1.5 1.5 0 0 0-1.5 1.5v13.5A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H15"/><path d="m9 13 2 2 4-4"/>',
  home:'<path d="M4 11 12 4l8 7v9H4z"/><path d="M10 20v-5h4v5"/>',
  topics:'<path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2zM4 19V5"/><path d="M8 7h6"/>',
  cards:'<rect x="4" y="6" width="13" height="14" rx="2"/><path d="M8 3h10a2 2 0 0 1 2 2v12"/>',
@@ -1526,7 +1552,7 @@ const UI_TICO=['<path d="M6 10a6 6 0 1 1 12 0c0 4.5-2.5 8.5-6 9.5-3.5-1-6-5-6-9.
  '<path d="M8 3v9c0 2-3 3-3 6 0 2 2 3 4 3h9.5c1.5 0 2-1.5 1-2.5L14 15V3"/><path d="M8 16.5h6"/>'];
 const UI_TCOL=[['#FFE9E3','#E8664A'],['#E6F0FF','#2F6BE0'],['#FFF3D9','#C98A06'],['#E2F6EF','#1F9D74'],['#EFE8FF','#7A55E0'],['#E3F5FB','#1A93BF'],['#FDE7F1','#D24C8B'],['#E4F4FC','#3B5BD6']];
 const uiShort=t=>t.short||t.title;
-const UI_NAV=[['home','Басты бет','#home','Басты'],['topics','Тақырыптар','#all_notes','Тақырып'],['cards','Карталар','#all_cards','Карта'],['test','Тесттер','#all_test','Тест'],['find','Суреттен тап','#all_find','Сурет'],['mix','Аралас тест','#mix_quiz','Аралас']];
+const UI_NAV=[['home','Басты бет','#home','Басты'],['topics','Тақырыптар','#all_notes','Тақырып'],['cards','Карталар','#all_cards','Карта'],['test','Тесттер','#all_test','Тест'],['find','Суреттен тап','#all_find','Сурет'],['rk','РК дайындық','#rk','РК'],['mix','Аралас тест','#mix_quiz','Аралас']];
 const UI_TABS=[['notes','Конспект',UI_ICO.notes,'#2F6BE0'],['cards','Флэш-карталар',UI_ICO.cards2,'#1F9D74'],['quiz','Тест',UI_ICO.test2,'#7A55E0'],['find','Суреттен тап',UI_ICO.find,'#E8664A']];
 const uiSvg=(path,cls)=>'<svg class="'+(cls||'')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+path+'</svg>';
 const uiArrow='<svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
@@ -1575,7 +1601,7 @@ function uiTilt(o){return h('div',{class:'stilt'},
   h('b',{},o.title),
   h('div',{class:'stilt-ft',html:uiSvg(UI_ICO.topics)+'<span>'+o.foot+'</span>'}))}
 const uiMasc=()=>uiTilt({eyebrow:'Анатомия / миология',img:UI_MZ.hi,title:'Dr. Pazyl',foot:'Конспект · карта · тест'});
-const UI_PILLS=act=>[['Тақырыптар','#all_notes',act==='topics',null,UI_ICO.topics,'#2F6BE0'],['Карталар','#all_cards',act==='cards',null,UI_ICO.cards,'#1F9D74'],['Тесттер','#all_test',act==='test',null,UI_ICO.test,'#7A55E0'],['Суреттен тап','#all_find',act==='find',null,UI_ICO.find,'#E8664A'],['Аралас тест','#mix_quiz',act==='mix',null,UI_ICO.mix,'#C98A06']];
+const UI_PILLS=act=>[['Тақырыптар','#all_notes',act==='topics',null,UI_ICO.topics,'#2F6BE0'],['Карталар','#all_cards',act==='cards',null,UI_ICO.cards,'#1F9D74'],['Тесттер','#all_test',act==='test',null,UI_ICO.test,'#7A55E0'],['Суреттен тап','#all_find',act==='find',null,UI_ICO.find,'#E8664A'],['Аралас тест','#mix_quiz',act==='mix',null,UI_ICO.mix,'#C98A06'],['РК дайындық','#rk',act==='rk',null,UI_ICO.rk,'#D9434E']];
 const uiCrumb=(cur,href,lbl)=>h('span',{},h('a',{href:href||'#home',html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>'+(lbl||'Басты бет')}),h('i',{},'/'),h('span',{},cur));
 const uiMz=ok=>h('img',{class:'mz',src:ok?UI_MZ.ok:UI_MZ.no,alt:''});
 
@@ -1605,7 +1631,7 @@ async function renderHome(){
   main.append(uiHero({cls:'home',eyebrow:'MedPazyl · анатомия курсы',title:'Миология',full:'Миология — қаңқа бұлшықеттері туралы ілім: басталуы, бекінуі, қызметі',
     stats:[[SECS.length,'тақырып'],[idx.length,'сабақ'],[ready.reduce((s,m)=>s+m.cards,0),'карта'],[ready.reduce((s,m)=>s+m.quiz,0),'тест']],
     pic:uiMasc(),mz:UI_MZ.hi,tabs:UI_PILLS('home')}));
-  main.append(h('div',{class:'in body'},h('h2',{class:'sh'},'Тақырыптар'),uiTopicList(idx,null),
+  main.append(h('div',{class:'in body'},h('h2',{class:'sh'},'Емтиханға дайындық'),h('div',{class:'rk-home'},uiRow('#rk',UI_ICO.rk,'#FCE9EA','#D9434E','РК','РК дайындық — 16 сұраққа толық жауап','30–45 сұрақтар · кестелер, өзектер, суреттер','Ашу')),h('h2',{class:'sh'},'Тақырыптар'),uiTopicList(idx,null),
     h('div',{class:'scard mob'},h('b',{},'Telegram-арнаға міндетті түрде қосылыңыз'),h('span',{},'Жаңа модульдер, кодтар мен хабарландырулар осында: @nurmedacademy'),h('a',{href:TELEGRAM,target:'_blank',rel:'noopener'},'Арнаға қосылу'))));
   window.scrollTo({top:0})}
 
@@ -1739,11 +1765,48 @@ function uiNotes(panel,m,id,si,toc,chips){
   mark(si);
   if(si>0)setTimeout(()=>go(si,false),60)}
 
+/* ---------- РК дайындық ---------- */
+let RK=null;const RKC={};
+async function getRK(){if(!RK){const r=await fetch('data/rk.json');RK=await r.json()}return RK}
+async function getRKItem(n){if(!RKC[n]){const r=await fetch('data/rk_'+String(n).padStart(2,'0')+'.json');RKC[n]=await r.json()}return RKC[n]}
+async function renderRK(){
+  const main=uiShell('rk');const d=await getRK();
+  const sum=k=>d.items.reduce((s,x)=>s+(x[k]||0),0);
+  main.append(uiHero({crumb:uiCrumb('РК дайындық'),eyebrow:'MedPazyl · Миология',title:'РК дайындық',
+    text:'Рубеждік бақылау сұрақтарына толық жауаптар: бұлшықеттердің басталуы, бекінуі, қызметі және нервтенуі — кестеде; өзектер, үшбұрыштар мен тесіктердің қабырғалары мен құрамы. Колесников оқулығы мен 2D модельдер негізінде.',
+    stats:[[d.items.length,'сұрақ'],[sum('nm'),'бұлшықет'],[sum('nf'),'сурет']],pic:uiMasc(),tabs:UI_PILLS('rk')}));
+  const read=new Set(store.get('rk_read',[]));
+  main.append(h('div',{class:'in body'},h('div',{class:'rk-list'},...d.items.map(it=>{
+    const meta=[it.nm?it.nm+' бұлшықет':null,it.nf?it.nf+' сурет':null].filter(Boolean).join(' · ');
+    const row=uiRow('#rk_'+it.n,UI_ICO.rk,read.has(it.n)?'#E3F6EE':'#FCE9EA',read.has(it.n)?'#1E9E6A':'#D9434E',it.n+'-сұрақ · №'+it.num+(read.has(it.n)?' · ✓ оқылды':''),it.short,meta,'Оқу');
+    row.querySelector('.tl-tx').append(h('span',{class:'rk-q'},it.title));return row}))));
+  window.scrollTo({top:0})}
+async function renderRKItem(n){
+  const main=uiShell('rk');const d=await getRK();const it=d.items.find(x=>x.n===n);
+  if(!it)return renderRK();
+  main.append(uiHero({cls:'rk',crumb:uiCrumb(n+'-сұрақ','#rk','РК дайындық'),eyebrow:'РК дайындық · '+n+'-сұрақ (№'+it.num+')',title:it.short,text:it.title}));
+  const body=h('div',{class:'in body'});main.append(body);
+  const chips=h('nav',{class:'rk-chips','aria-label':'Сұрақтар'},...d.items.map(x=>h('a',{href:'#rk_'+x.n,class:x.n===n?'on':null,title:x.short},String(x.n))));
+  body.append(chips);
+  const holder=h('div',{class:'empty',style:'margin-top:20px'},'Жүктелуде…');body.append(holder);
+  const q=await getRKItem(n);holder.remove();
+  const bd=h('div',{class:'prose sect-bd rk-bd'});
+  for(const b of q.blocks){const e=blk(b,q.figs);if(e)bd.append(e)}
+  const prev=d.items.find(x=>x.n===n-1),next=d.items.find(x=>x.n===n+1);
+  body.append(h('article',{class:'sect rk-sect'},bd),
+    h('div',{class:'rk-pn'},
+      prev?h('a',{class:'btn ghost',href:'#rk_'+prev.n},'← '+prev.n+'. '+prev.short):h('span'),
+      next?h('a',{class:'btn ghost nx',href:'#rk_'+next.n},next.n+'. '+next.short+' →'):h('a',{class:'btn ghost nx',href:'#rk'},'Барлық сұрақтар →')));
+  const read=new Set(store.get('rk_read',[]));read.add(n);store.set('rk_read',[...read]);
+  window.scrollTo({top:0})}
+
 /* ---------- router ---------- */
 async function route(){
   if(!unlocked)return renderGate();
   const hs=(location.hash||'#home').slice(1);
   if(!hs||hs==='home')return renderHome();
+  if(hs==='rk')return renderRK();
+  {const r=hs.match(/^rk_(\d+)$/);if(r)return renderRKItem(+r[1])}
   if(hs==='mix_cards')return renderMix('cards');
   if(hs==='mix_quiz')return renderMix('quiz');
   const a=hs.match(/^all_(notes|cards|test|find)$/);
