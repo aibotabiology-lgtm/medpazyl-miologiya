@@ -1201,6 +1201,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
  .rk-pn .btn.nx{justify-content:flex-start;text-align:left}
  .rk-sect{padding:4px 12px 18px}
 }
+
+@media(max-width:760px){.ctab th{width:auto!important;min-width:96px;max-width:34%;overflow-wrap:normal!important;word-break:keep-all}}
 </style>
 
 <div id="app"><div class="loading">Жүктелуде…</div></div>
@@ -1366,6 +1368,7 @@ async function getMod(id){if(!CACHE[id]){const r=await fetch('data/'+id+'.json')
 function cardsOf(m){
   const out=[];
   for(const b of (m.muscles||[]))if(b.img)out.push({type:'muscle',mod:m.id,id:'m:'+b.id,img:b.img,la:b.la,kz:b.kz,ru:b.ru,kind:b.group,orig:b.orig,ins:b.ins,text:b.func,nerve:b.nerve,facts:b.facts||[]});
+  for(const b of (m.xcards||[]))if(b.img)out.push({type:'x',mod:m.id,id:'x:'+b.id,img:b.img,la:b.la,kz:b.kz,ru:b.ru,group:b.group,q:b.q,rows:b.rows||[],facts:b.facts||[]});
   for(const f of m.figures)f.labels.forEach((l,i)=>out.push({type:'part',mod:m.id,id:'p:'+f.id+':'+i,fig:f,li:i,la:l.la,kz:l.kz,ru:l.ru,text:l.note,facts:[]}));
   return out}
 
@@ -1408,14 +1411,15 @@ function renderCards(panel,all,key){
   let filter='all',deck=[],pos=0,known=new Set(store.get(key,[]));let onlyUnknown=false;
   const tb=h('div',{class:'toolbar'});
   const seg=h('div',{class:'seg',role:'group','aria-label':'Карта түрі'});
-  [['all','Барлығы'],['muscle','Бұлшықеттер'],['part','Суреттегі бөліктер']].forEach(([k,l])=>seg.append(h('button',{'aria-pressed':String(k==='all'),onclick:e=>{filter=k;seg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===e.currentTarget)));build(false)}},l)));
+  const xg=[...new Set(all.filter(c=>c.type==='x').map(c=>c.group))];
+  [['all','Барлығы'],...(all.some(c=>c.type==='muscle')?[['muscle','Бұлшықеттер']]:[]),...xg.map(g=>['x:'+g,g]),['part','Суреттегі бөліктер']].forEach(([k,l])=>seg.append(h('button',{'aria-pressed':String(k==='all'),onclick:e=>{filter=k;seg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===e.currentTarget)));build(false)}},l)));
   const unk=h('button',{class:'iconbtn','aria-pressed':'false',onclick:()=>{onlyUnknown=!onlyUnknown;unk.setAttribute('aria-pressed',String(onlyUnknown));unk.textContent=onlyUnknown?'Барлық карталар':'Тек білмейтіндерім';build(false)}},'Тек білмейтіндерім');
   const counter=h('span',{class:'counter'});
   tb.append(seg,h('button',{class:'iconbtn',onclick:()=>build(true)},'Араластыру'),unk,h('span',{class:'sp'}),counter);
   const prog=h('div',{class:'bar-prog'},h('i'));
   const holder=h('div');
   panel.append(tb,prog,holder);
-  function build(mix){deck=all.filter(c=>filter==='all'||c.type===filter).filter(c=>!onlyUnknown||!known.has(c.id));if(mix)deck=shuffle(deck);pos=0;show()}
+  function build(mix){deck=all.filter(c=>filter==='all'||c.type===filter||(c.type==='x'&&filter==='x:'+c.group)).filter(c=>!onlyUnknown||!known.has(c.id));if(mix)deck=shuffle(deck);pos=0;show()}
   function show(){
     holder.innerHTML='';
     counter.textContent=deck.length?`${pos+1} / ${deck.length} · білемін: ${deck.filter(c=>known.has(c.id)).length}`:'';
@@ -1423,16 +1427,16 @@ function renderCards(panel,all,key){
     if(!deck.length){holder.append(h('div',{class:'empty'},onlyUnknown?'Барлық карталарды білесіз! Жарайсыз.':'Карта жоқ.'));return}
     const c=deck[pos];
     let front;
-    if(c.type==='muscle')front=h('div',{class:'imgbox'},h('img',{class:'single',src:c.img,alt:'Бұлшықет суреті',draggable:'false'}));
+    if(c.type==='muscle'||c.type==='x')front=h('div',{class:'imgbox'},h('img',{class:'single',src:c.img,alt:'Бұлшықет суреті',draggable:'false'}));
     else front=h('div',{class:'imgbox'},stage(c.fig,{hot:[c.li],maxH:.56}));
-    const crow=[['Тобы',c.kind],['Басталуы',c.orig],['Бекінуі',c.ins],[c.type==='muscle'?'Қызметі':'Маңызы',c.text&&c.text.replace(/^Қызметі:\s*/,'')],['Нервтенуі',c.nerve]].filter(r=>r[1]);
+    const crow=c.type==='x'?[['Тобы',c.group],...c.rows]:[['Тобы',c.kind],['Басталуы',c.orig],['Бекінуі',c.ins],[c.type==='muscle'?'Қызметі':'Маңызы',c.text&&c.text.replace(/^Қызметі:\s*/,'')],['Нервтенуі',c.nerve]].filter(r=>r[1]);
     const back=h('div',{class:'face back'},
       h('div',{class:'latsay'},h('span',{class:'la lat'},c.la),sayBtn(c.la)),h('div',{class:'kz'},c.kz),c.ru?h('div',{class:'ru'},'рус. '+c.ru):null,
-      crow.length?h('table',{class:'ctab'},h('tbody',{},...crow.map(([k,v])=>h('tr',{},h('th',{},k),h('td',{},v))))):null,
-      c.facts.length?h('div',{class:'facts'},h('b',{},'Есте сақта'),h('ul',{},c.facts.map(f=>h('li',{},f)))):null);
+      crow.length?h('table',{class:'ctab'},h('tbody',{},...crow.map(([k,v])=>h('tr',{},h('th',{},k),h('td',{html:inline(v)}))))):null,
+      c.facts.length?h('div',{class:'facts'},h('b',{},'Есте сақта'),h('ul',{},c.facts.map(f=>h('li',{html:inline(f)})))):null);
     const card=h('div',{class:'card',tabindex:'0',role:'button','aria-label':'Картаны аудару',onclick:()=>{card.classList.toggle('flip');const r=card.getBoundingClientRect();if(r.top<70)window.scrollBy({top:r.top-80,behavior:'smooth'})},onkeydown:e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();card.classList.toggle('flip')}}},
       h('div',{class:'card-in'},
-        h('div',{class:'face front'},h('div',{class:'hint'},h('span',{},c.type==='muscle'?'Бұл қай бұлшықет?':'Белгіленген құрылым қалай аталады?'),known.has(c.id)?h('span',{class:'mastered'},'✓ карта меңгерілді'):h('span',{},'басып аударыңыз')),front),back));
+        h('div',{class:'face front'},h('div',{class:'hint'},h('span',{},c.type==='muscle'?'Бұл қай бұлшықет?':c.type==='x'?(c.q||'Бұл не?'):'Белгіленген құрылым қалай аталады?'),known.has(c.id)?h('span',{class:'mastered'},'✓ карта меңгерілді'):h('span',{},'басып аударыңыз')),front),back));
     const mark=v=>{if(v)known.add(c.id);else known.delete(c.id);store.set(key,[...known]);go(1)};
     holder.append(card,h('div',{class:'cardnav'},
       h('button',{class:'btn ghost',onclick:()=>go(-1),'aria-label':'Алдыңғы'},'←'),
